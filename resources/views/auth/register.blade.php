@@ -1,8 +1,11 @@
-<x-guest-layout>
+
+<x-guest-layout >
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+            <h1 style="color:white; font-size: 40px"> Registration </h1>
+
         </x-slot>
+
 
         <x-validation-errors class="mb-4" />
 
@@ -56,5 +59,7 @@
                 </x-button>
             </div>
         </form>
+
     </x-authentication-card>
 </x-guest-layout>
+
