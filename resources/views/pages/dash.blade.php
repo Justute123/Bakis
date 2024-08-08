@@ -65,7 +65,7 @@ session_start();
                     <li class="nav-item">
                         <a href="{{ url('/admin/users') }}" class="nav-link">
                             <i class="nav-icon fas fa-user-edit"></i>
-                            <p>Users</p>
+                            <p>Students</p>
                         </a>
                     </li>
                     <li class="nav-item">

@@ -12,10 +12,6 @@ Route::get('/dashInd', function () {
     return view('pages/dashInd');
 });
 
-Route::get('/admin/users', [App\Http\Controllers\admin\UsersController::class, 'index']);
-
-
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -25,3 +21,7 @@ Route::middleware([
         return view('pages/dash');
     })->name('dashboard');
 });
+
+Route::get('/admin/users', [App\Http\Controllers\admin\UsersController::class, 'index']);
+Route::get('/admin/users/create', [App\Http\Controllers\admin\UsersController::class, 'create']);
+Route::post('/admin/users', [App\Http\Controllers\admin\UsersController::class, 'store'])->name('store');

@@ -16,7 +16,49 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::paginate('5');
-        return view('pages.dashboardUsersIndex', compact('users'));
+        $students = User::where('role_id', 1)->paginate(5);
+        return view('pages.dashboardUsersIndex', compact('users', 'students'));
     }
+
+    public function create()
+    {
+
+        return view('pages.dashboardUsersForm');
+    }
+
+    public function store(Request $request)
+    {
+
+      $request->validate([
+                'name' => ['required', 'alpha', 'max:255'],
+                'surname' => ['required', 'alpha', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required'],
+                'study_programme' => ['nullable', 'string', 'max:255'],
+            ]
+        );
+
+        $user = new User();
+        $user->name=$request->name;
+        $user->surname=$request->surname;
+        $user->email=$request->email;
+        $user->study_programme=$request->study_programme;
+        $user->role_id='1';
+        $user->password=Hash::make($request->password);
+        $res = $user -> save();
+        if($res){
+            return redirect('admin/users')->with('success', 'Student is added succsfully');
+        }
+        else{
+            return redirect('admin/users')->with('fail', 'Student is not added succsfully');
+
+        }
+
+
+
+
+    }
+
+
 
 }
