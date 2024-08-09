@@ -61,11 +61,23 @@ session_start();
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
+                    <li class="nav-item">
+                        <a href="{{ url('/admin/studyProgrammes') }}" class="nav-link">
+                            <i class="nav-icon fas fa-user-edit"></i>
+                            <p>Study programmes</p>
+                        </a>
+                    </li>
 
                     <li class="nav-item">
                         <a href="{{ url('/admin/users') }}" class="nav-link">
                             <i class="nav-icon fas fa-user-edit"></i>
                             <p>Students</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/admin/topics') }}" class="nav-link">
+                            <i class="nav-icon fas fa-user-edit"></i>
+                            <p>Topics</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -75,17 +87,24 @@ session_start();
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ url('/admin/quizes') }}" class="nav-link">
+                            <i class="fa-solid fa-question"></i>
+                            <p>Quizes</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ url('/admin/questions') }}" class="nav-link">
                             <i class="fa-solid fa-question"></i>
                             <p>Questions</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/admin/quizes') }}" class="nav-link">
+                        <a href="{{ url('/admin/options') }}" class="nav-link">
                             <i class="fa-solid fa-question"></i>
-                            <p>Quizes</p>
+                            <p>Options</p>
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ url('/admin/solvedQuizesHistory') }}" class="nav-link">
                             <i class="fa-solid fa-question"></i>

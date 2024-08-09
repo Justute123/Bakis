@@ -25,3 +25,13 @@ Route::middleware([
 Route::get('/admin/users', [App\Http\Controllers\admin\UsersController::class, 'index']);
 Route::get('/admin/users/create', [App\Http\Controllers\admin\UsersController::class, 'create']);
 Route::post('/admin/users', [App\Http\Controllers\admin\UsersController::class, 'store'])->name('store');
+Route::get('/admin/users/{id}/edit', [App\Http\Controllers\admin\UsersController::class, 'edit']);
+Route::put('/admin/users/{id}', [App\Http\Controllers\admin\UsersController::class, 'update'])->name('students.update');
+Route::post('admin/users/deleteStudent', [App\Http\Controllers\admin\UsersController::class, 'destroy']);
+Route::get('/admin/topics', [App\Http\Controllers\admin\TopicsController::class, 'index']);
+Route::get('/admin/topics/create', [App\Http\Controllers\admin\TopicsController::class, 'create']);
+Route::post('/admin/topics', [App\Http\Controllers\admin\TopicsController::class, 'store'])->name('topics.store');
+Route::get('/admin/topics/{id}/edit', [App\Http\Controllers\admin\TopicsController::class, 'edit']);
+Route::put('/admin/topics/{id}', [App\Http\Controllers\admin\TopicsController::class, 'update'])->name('topics.update');
+Route::post('admin/topics/deleteTopic', [App\Http\Controllers\admin\TopicsController::class, 'destroy']);
+

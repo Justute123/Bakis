@@ -3,9 +3,34 @@
 @section('title', 'Students')
 
 @section('content')
-    @section('content')
+        <!-- MODALINE FORMA PAKLAUSIMUI AR NORIME ISTRINTI -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form action="{{url('admin/users/deleteStudent')}}" method="Post">
+                        @csrf
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">delete student</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="student_delete_id" id="student_id" >
+                            <h5>Do your really want to delete this? </h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Yes,delete it</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
         <div class="card">
             <div class="card-header">
+
                 <a href="{{ url('admin/users/create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>Add student</a>
             </div>
             <div class="card-body">
@@ -31,7 +56,7 @@
                             <th>Role id</th>
                             <th>Email</th>
                             <th>Study programme</th>
-                            <th>Veiksmai</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -44,7 +69,8 @@
                                 <td>{{ $student->email }}</td>
                                 <td>{{ $student->study_programme }}</td>
                                 <td>
-                                    <a  class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Redaguoti</a>
+                                    <a href="{{ url('admin/users/'.$student->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                    <button type="button" class="btn btn-danger deleteStudentBtn"  value="{{$student->id}}">Delete</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -54,4 +80,19 @@
             </div>
         </div>
         {{$students-> links()}}
+
     @endsection
+
+    @section('scripts')
+        <script>
+            $(document).ready(function(){
+                $('.deleteStudentBtn').click(function(e) {
+                    e.preventDefault();
+                    var student_id = $(this).val();
+                    $('#student_id').val(student_id);
+                    $('#deleteModal').modal('show');
+                });
+            });
+        </script>
+    @endsection
+

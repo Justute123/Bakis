@@ -54,10 +54,55 @@ class UsersController extends Controller
 
         }
 
+    }
+    public function edit(string $id)
+    {
+        $student = User::findOrFail($id);
 
+
+        return view('pages.dashboardUsersEdit',compact('student'));
+    }
+    public function update(Request $request, string $id)
+    {
+
+        $student = User::findOrFail($id);
+        $request->validate([
+                'name' => ['required', 'alpha', 'max:255'],
+                'surname' => ['required', 'alpha', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$student->id],
+                'password' => ['required'],
+                'study_programme' => ['nullable', 'string', 'max:255'],
+            ]
+        );
+
+        $student->update(['name'=>$request->input('name')]);
+        $student->update(['surname'=>$request->input('surname')]);
+        $student->update(['email'=>$request->input('email')]);
+        $student->update(['password'=>$request->input('password')]);
+        if(!Hash::check($request->input('password'),$student->password))
+        {
+            $student->update(['password'=>Hash::make($request->input('password'))]);
+        }
+
+        $student->save();
+        return redirect('/admin/users')->with('success', 'Student was succesfully updated');
 
 
     }
+    public function destroy(Request $request)
+    {
+        $student = User::findOrFail($request->student_delete_id);
+        try {
+            $student->delete();
+            return redirect('admin/users')->with('success', 'Student was successfully deleted');
+        }
+        catch (\Illuminate\Database\QueryException $exception) {
+            return back()->with('error', 'you can not delete this student');
+        }
+
+    }
+
+
 
 
 
