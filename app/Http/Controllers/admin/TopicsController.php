@@ -90,7 +90,7 @@ class TopicsController extends Controller
      */
     public function destroy(Request $request)
     {
-        $topic = Topicklaste::findOrFail($request->topic_delete_id);
+        $topic = Topic::findOrFail($request->topic_delete_id);
         try {
             $topic->delete();
             return redirect('admin/topics')->with('success', 'Topic was successfully deleted');
