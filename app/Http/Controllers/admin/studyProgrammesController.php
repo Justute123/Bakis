@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\studyProgramme;
 use Illuminate\Http\Request;
 
 class studyProgrammesController extends Controller
@@ -12,7 +13,8 @@ class studyProgrammesController extends Controller
      */
     public function index()
     {
-        //
+        $studyProgrammes = studyProgramme::paginate('5');
+        return view('pages.dashboardStudyProgrammesIndex', compact('studyProgrammes'));
     }
 
     /**
@@ -20,7 +22,7 @@ class studyProgrammesController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.dashboardStudyProgrammesForm');
     }
 
     /**
@@ -28,7 +30,22 @@ class studyProgrammesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+                'title' => ['required', 'alpha', 'max:255'],
+            ]
+        );
+
+        $studyProgramme = new studyProgramme();
+        $studyProgramme->title=$request->title;
+        $res = $studyProgramme -> save();
+        if($res){
+            return redirect('admin/studyProgrammes')->with('success', 'Study programme is added succsfully');
+        }
+        else{
+            return redirect('admin/studyProgrammes')->with('fail', 'Study programme is not added succsfully');
+
+        }
     }
 
     /**
@@ -44,7 +61,10 @@ class studyProgrammesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $studyProgramme = studyProgramme::findOrFail($id);
+
+
+        return view('pages.dashboardstudyProgrammesEdit',compact('studyProgramme'));
     }
 
     /**
@@ -52,14 +72,30 @@ class studyProgrammesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $studyProgramme = studyProgramme::findOrFail($id);
+        $request->validate([
+                'title' => ['required', 'alpha', 'max:255'],
+
+            ]
+        );
+
+        $studyProgramme->update(['title'=>$request->input('title')]);
+        $studyProgramme->save();
+        return redirect('/admin/studyProgrammes')->with('success', 'Study programme was succesfully updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $studyProgramme = studyProgramme::findOrFail($request->studyProgramme_delete_id);
+        try {
+            $studyProgramme->delete();
+            return redirect('admin/studyProgrammes')->with('success', 'Study programme was successfully deleted');
+        }
+        catch (\Illuminate\Database\QueryException $exception) {
+            return back()->with('error', 'you can not delete this study programme');
+        }
     }
 }
