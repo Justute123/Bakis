@@ -40,4 +40,8 @@ Route::post('/admin/studyProgrammes', [App\Http\Controllers\admin\studyProgramme
 Route::get('/admin/studyProgrammes/{id}/edit', [App\Http\Controllers\admin\studyProgrammesController::class, 'edit']);
 Route::put('/admin/studyProgrammes/{id}', [App\Http\Controllers\admin\studyProgrammesController::class, 'update'])->name('studyProgramme.update');
 Route::post('admin/studyProgrammes/deleteStudyProgramme', [App\Http\Controllers\admin\studyProgrammesController::class, 'destroy']);
+Route::get('/admin/theory', [App\Http\Controllers\admin\TheoryController::class, 'index']);
+Route::get('/admin/theory/create', [App\Http\Controllers\admin\TheoryController::class, 'create']);
+Route::post('/admin/theory', [App\Http\Controllers\admin\TheoryController::class, 'store'])->name('theory.store');
+
 
