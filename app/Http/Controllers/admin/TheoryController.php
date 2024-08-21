@@ -46,15 +46,6 @@ class TheoryController extends Controller
 
         if($request->hasFile('image')){
 
-           // $destination_path = 'public/images';
-            // retrieves the uploaded file from HTTP request
-           // $image = $request -> file('image');
-            // retrieve original name of file
-           // $image_name = $image -> getClientOriginalName();
-           // $unique_image_name = time().'_'.$image_name;
-            // retrieves the uploaded file from HTTP request and store in destination path
-            //$path = $request -> file('image') ->storeAs($destination_path, $unique_image_name);
-            //$theory['image'] = '/storage/images/'.$unique_image_name;
             $imageName = time().'.'.$request->image->extension();
             $request->image->move(public_path('images'), $imageName);
             $theory->image = 'images/'.$imageName;
@@ -86,7 +77,11 @@ class TheoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $topics = Topic::paginate('5');
+        $theory = Theory::findOrFail($id);
+
+
+        return view('pages.dashboardTheoryEdit',compact('topics','theory'));
     }
 
     /**
@@ -94,14 +89,49 @@ class TheoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+                'title' => 'required|string|max:255',
+                'description' => 'required|string|max:255',
+                'topic_id' => 'required|not_in:0',
+                'image' => 'required',]
+        );
+
+        $theory= new Theory();
+        $theory->title=$request->title;
+        $theory->description=$request->title;
+        $theory->topic_id=$request->topic_id;
+
+        if($request->hasFile('image')){
+
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $theory->image = 'images/'.$imageName;
+
+
+        }
+       // $theory->update($request->all());
+        $res = $theory -> save();
+        if($res){
+            return redirect('admin/theory')->with('success', 'Theory is updated succsfully');
+        }
+        else{
+            return redirect('admin/theory')->with('fail', 'Theory is not updated succsfully');
+
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $theory = Theory::findOrFail($request->theory_delete_id);
+        try {
+            $theory->delete();
+            return redirect('admin/theory')->with('success', 'Theory was successfully deleted');
+        }
+        catch (\Illuminate\Database\QueryException $exception) {
+            return back()->with('error', 'you can not delete this theory');
+        }
     }
 }
