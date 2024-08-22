@@ -109,7 +109,7 @@ class TheoryController extends Controller
 
 
         }
-       // $theory->update($request->all());
+        $theory->update($request->all());
         $res = $theory -> save();
         if($res){
             return redirect('admin/theory')->with('success', 'Theory is updated succsfully');

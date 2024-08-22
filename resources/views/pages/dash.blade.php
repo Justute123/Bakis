@@ -44,7 +44,7 @@ session_start();
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="info">
                     <a href="#" class="d-block">
-                        <p>Welcome, {{Auth::user()->name}}!</p>
+                        <p>Welcome, teacher {{Auth::user()->name}}!</p>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();">
