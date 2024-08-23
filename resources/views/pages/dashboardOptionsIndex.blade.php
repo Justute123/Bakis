@@ -1,24 +1,22 @@
 @extends('pages.dash')
 
-@section('title', 'Questions')
+@section('title', 'Options')
 
 @section('content')
-
-
     <!-- MODALINE FORMA PAKLAUSIMUI AR NORIME ISTRINTI -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="{{url('admin/questions/deleteQuestions')}}" method="Post">
+                <form action="{{url('admin/options/deleteOptions')}}" method="Post">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">delete question</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">delete option</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="question_delete_id" id="question_id" >
+                        <input type="hidden" name="option_delete_id" id="option_id" >
                         <h5>Do your really want to delete this? </h5>
                     </div>
                     <div class="modal-footer">
@@ -33,7 +31,7 @@
 
     <div class="card">
         <div class="card-header">
-            <a href="{{ url('admin/questions/create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add question</a>
+            <a href="{{ url('admin/options/create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add option</a>
         </div>
         <div class="card-body">
             @if(Session::has('success'))
@@ -53,23 +51,25 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>question text</th>
-                        <th>quiz_id</th>
+                        <th>option text</th>
+                        <th>question_id</th>
                         <th>order</th>
-                        <th>hint</th>
+                        <th>isCorrect</th>
+                        <th>point</th>
                         <th>actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($questions as $question)
-                        <td>{{ $question->id }}</td>
-                        <td>{{ $question->question_text }}</td>
-                        <td>{{ $question->quiz_id }}</td>
-                        <td>{{ $question->order }}</td>
-                        <td>{{ $question->hint }}</td>
+                    @foreach($options as $option)
+                        <td>{{ $option->id }}</td>
+                        <td>{{ $option->option_text }}</td>
+                        <td>{{ $option->question_id }}</td>
+                        <td>{{ $option->order }}</td>
+                        <td>{{ $option->isCorrect }}</td>
+                        <td>{{ $option->point }}</td>
                         <td>
-                            <a href="{{ url('admin/questions/'.$question->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                            <button type="button" class="btn btn-danger deleteQuestionBtn"  value="{{$question->id}}">Delete</button>
+                            <a href="{{ url('admin/options/'.$option->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                            <button type="button" class="btn btn-danger deleteOptionBtn"  value="{{$option->id}}">Delete</button>
                         </td>
                         </tr>
                     @endforeach
@@ -78,21 +78,23 @@
             </div>
         </div>
     </div>
-    {{$questions-> links()}}
+    {{$options-> links()}}
 
 @endsection
-
 @section('scripts')
     <script>
         $(document).ready(function(){
-            $('.deleteQuestionBtn').click(function(e) {
+            $('.deleteOptionBtn').click(function(e) {
                 e.preventDefault();
-                var question_id = $(this).val();
-                $('#question_id').val(question_id);
+                var option_id = $(this).val();
+                $('#option_id').val(option_id);
                 $('#deleteModal').modal('show');
             });
         });
     </script>
 @endsection
+
+
+
 
 

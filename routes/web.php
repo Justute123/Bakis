@@ -60,5 +60,15 @@ Route::post('admin/quizes/deleteQuizes', [App\Http\Controllers\admin\QuizesContr
 Route::get('/admin/questions', [App\Http\Controllers\admin\QuestionsController::class, 'index']);
 Route::get('/admin/questions/create', [App\Http\Controllers\admin\QuestionsController::class, 'create']);
 Route::post('/admin/questions', [App\Http\Controllers\admin\QuestionsController::class, 'store'])->name('question.store');
+Route::get('/admin/questions/{id}/edit', [App\Http\Controllers\admin\QuestionsController::class, 'edit']);
+Route::put('/admin/questions/{id}', [App\Http\Controllers\admin\QuestionsController::class, 'update'])->name('question.update');
+Route::post('admin/questions/deleteQuestions', [App\Http\Controllers\admin\QuestionsController::class, 'destroy']);
+
+Route::get('/admin/options', [App\Http\Controllers\admin\OptionsController::class, 'index']);
+Route::get('/admin/options/create', [App\Http\Controllers\admin\OptionsController::class, 'create']);
+Route::post('/admin/options', [App\Http\Controllers\admin\OptionsController::class, 'store'])->name('option.store');
+Route::get('/admin/options/{id}/edit', [App\Http\Controllers\admin\OptionsController::class, 'edit']);
+Route::put('/admin/options/{id}', [App\Http\Controllers\admin\OptionsController::class, 'update'])->name('option.update');
+Route::post('admin/options/deleteOptions', [App\Http\Controllers\admin\OptionsController::class, 'destroy']);
 
 

@@ -36,7 +36,7 @@ class QuestionsController extends Controller
                 'question_text' => 'required|string|max:255',
                 'hint' => 'required|string|max:255',
                 'order' => 'required|numeric|max:255',
-                'question_id' => 'required|not_in:0',
+                'quiz_id' => 'required|not_in:0',
                 'type' => 'required',]
         );
 
@@ -44,7 +44,7 @@ class QuestionsController extends Controller
         $question->question_text=$request->question_text;
         $question->hint=$request->hint;
         $question->order=$request->order;
-        $question->question_id=$request->question_id;
+        $question->quiz_id=$request->quiz_id;
         $question->type=$request->type;
 
 
@@ -71,7 +71,12 @@ class QuestionsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $question = Question::findOrFail($id);
+        $quizes = Quiz::paginate('5');
+
+
+
+        return view('pages.dashboardQuestionsEdit',compact('quizes','question'));
     }
 
     /**
@@ -79,14 +84,45 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+                'question_text' => 'required|string|max:255',
+                'hint' => 'required|string|max:255',
+                'order' => 'required|numeric|max:255',
+                'quiz_id' => 'required|not_in:0',
+                'type' => 'required',]
+        );
+
+        $question= new Question();
+        $question->question_text=$request->question_text;
+        $question->hint=$request->hint;
+        $question->order=$request->order;
+        $question->quiz_id=$request->quiz_id;
+        $question->type=$request->type;
+
+
+        $question->update($request->all());
+        $res = $question -> save();
+        if($res){
+            return redirect('admin/questions')->with('success', 'Question is updated succsfully');
+        }
+        else{
+            return redirect('admin/questions')->with('fail', 'Question is not updated succsfully');
+
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $question = Question::findOrFail($request->question_delete_id);
+        try {
+            $question->delete();
+            return redirect('admin/questions')->with('success', 'Question was successfully deleted');
+        }
+        catch (\Illuminate\Database\QueryException $exception) {
+            return back()->with('error', 'you can not delete this question');
+        }
     }
 }
