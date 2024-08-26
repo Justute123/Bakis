@@ -11,6 +11,15 @@ Route::get('/index', function () {
 Route::get('/dashInd', function () {
     return view('pages/dashInd');
 });
+Route::get('/newsAsStudent', function () {
+    return view('pages/newsAsStudent');
+});
+
+Route::get('/theory', [App\Http\Controllers\theoryController::class, 'index']);
+Route::get('/theory/{id}', [App\Http\Controllers\theoryController::class, 'show']);
+
+
+
 
 Route::middleware([
     'auth:sanctum',

@@ -11,4 +11,9 @@ class Theory extends Model
 
     protected $table = 'theory';
     protected $fillable = ['image','title','description','topic_id'];
+
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class)->withDefault();
+    }
 }
