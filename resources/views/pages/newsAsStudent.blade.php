@@ -73,6 +73,7 @@
 
 
         <div class="container" >
+            <br>
             <h2>@yield('title')</h2>
             <br>
         <div class="row" >

@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use Illuminate\Http\Request;
 use App\Models\Theory;
 use App\Models\Topic;
+
 
 class theoryController extends Controller
 {
@@ -45,12 +46,11 @@ class theoryController extends Controller
     public function filterTheoryById(string $id)
     {
         $topic = Topic::findOrFail($id);
-        $theoryFilteredByTopic = DB::table('theory')
-            ->join('topics','topics.id','theory.topic_id')
-            ->select('title')
-            ->where('topic_id',$topic->id)
-            ->distinct()
-            ->get();
+         $theoryFilteredByTopic = DB::table('theory')
+             ->select('*')
+             ->where('topic_id',$topic->id)
+             ->get();
+
 
         return view('pages.filteredByTopic', compact('topic','theoryFilteredByTopic'));
     }

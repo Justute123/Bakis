@@ -16,7 +16,8 @@ Route::get('/newsAsStudent', function () {
 });
 
 Route::get('/theory', [App\Http\Controllers\theoryController::class, 'index']);
-Route::get('/theory/{id}', [App\Http\Controllers\theoryController::class, 'show']);
+Route::get('/theory/{id}', [App\Http\Controllers\theoryController::class, 'filterTheoryById']);
+Route::get('/theory/{id}/show', [App\Http\Controllers\theoryController::class, 'show']);
 
 
 
