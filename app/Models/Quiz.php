@@ -10,4 +10,10 @@ class Quiz extends Model
     use HasFactory;
     protected $table = 'quizes';
     protected $fillable = ['title','topic_id','isActive'];
+
+
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class)->withDefault();
+    }
 }

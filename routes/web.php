@@ -14,10 +14,19 @@ Route::get('/dashInd', function () {
 Route::get('/newsAsStudent', function () {
     return view('pages/newsAsStudent');
 });
+Route::get('/quiz', function () {
+    return view('pages/quiz');
+});
 
 Route::get('/theory', [App\Http\Controllers\theoryController::class, 'index']);
 Route::get('/theory/{id}', [App\Http\Controllers\theoryController::class, 'filterTheoryById']);
 Route::get('/theory/{id}/show', [App\Http\Controllers\theoryController::class, 'show']);
+Route::get('/quiz', [App\Http\Controllers\QuizController::class, 'index']);
+Route::get('/quiz/{id}', [App\Http\Controllers\QuizController::class, 'filterQuestionsByQuizId']);
+Route::post('/submitAnswer/{id}', [App\Http\Controllers\QuizController::class, 'submitAnswer'])->name('submit');
+
+
+
 
 
 
