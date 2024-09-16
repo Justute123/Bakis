@@ -12,17 +12,22 @@
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-3">
-                            <h4> # {{Session::get("next")}} : {{$question->question_text}}</h4>
+                            <h4> # {{Session::get("next")}}: {{$question->question_text}}</h4>
                             @foreach($orderedOptions as $option)
 
                                 <input type="radio" id="{{$option->id}}" name="optionText" value=" {{$option->option_text}}">
                                 <label for="optionText"> {{$option->option_text}}</label><br>
                                 <input style="visibility: hidden" value="{{$option->isCorrect}}" name="checkIfCorrect">
                                 <input style="visibility: hidden" value="{{$option->point}}" name="point">
+                                <input style="visibility: hidden" value="{{$option->question_id}}" name="questionId">
+                                <input style="visibility: hidden" value="{{$question->question_text}}" name="questionText">
+                                <span class="text-danger"> @error('optionText') {{$message}} @enderror</span>
 
 
 
                             @endforeach
+
+
 
                         </div>
                     </div>

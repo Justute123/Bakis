@@ -28,6 +28,9 @@ class QuizController extends Controller
         Session::put('wrongans','0');
         Session::put('correctans','0');
         Session::put('total','0');
+        $storedArray = Session::put('storedArray',[]);
+        $storedPoint = Session::put('storedPoint',[]);
+        $storedQuestion = Session::put('storedQuestion',[]);
         $quiz = Quiz::findOrFail($id);
 
         $questionsFilteredByQuiz = DB::table('questions')
@@ -51,6 +54,9 @@ class QuizController extends Controller
         //Validacijos reikia
 
         $next = Session::get('next');
+        $storedArray = Session::get('storedArray');
+        $storedPoint = Session::get('storedPoint');
+        $storedQuestion = Session::get('storedQuestion');
         $next++;
         Session::put('next',$next);
         $quiz = new Quiz();
@@ -75,10 +81,18 @@ class QuizController extends Controller
 
             $correctans = Session::get('correctans');
             $total = Session::get('total');
+            $storedQuestion[] =$request->questionText;
+            Session::put('storedQuestion',$storedQuestion);
             if($request->checkIfCorrect == 1)
             {
                 $correctans++;
                 $total = $total + ($request->point);
+                $choosed = $request->optionText;
+                $storedArray[] = $choosed;
+                $storedPoint[] =$request->point;
+                Session::put('storedArray', $storedArray);
+                Session::put('storedPoint', $storedPoint);
+
                 Session::put('total',$total);
                 Session::put('correctans',$correctans);
             }
@@ -87,11 +101,19 @@ class QuizController extends Controller
             if($request->checkIfCorrect == 0)
             {
                 $wrongans++;
+                $choosed = $request->optionText;
+                $storedArray[] = $choosed;
+                Session::put('storedArray', $storedArray);
+                $storedPoint[] =$request->point;
+                Session::put('storedArray', $storedArray);
+                Session::put('storedPoint', $storedPoint);
                 Session::put('wrongans',$wrongans);
             }
 
+
             return view('pages.questionsFilteredByQuiz', compact('question','quiz','optionsFilteredByQuestion','orderedOptions'));
         }
+
 
         if($next >= $numberOfItems)
         {
