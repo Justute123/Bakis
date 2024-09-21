@@ -79,6 +79,7 @@ class UsersController extends Controller
         $student->update(['surname'=>$request->input('surname')]);
         $student->update(['email'=>$request->input('email')]);
         $student->update(['password'=>$request->input('password')]);
+        $student->update(['study_programme'=>$request->input('study_programme')]);
         if(!Hash::check($request->input('password'),$student->password))
         {
             $student->update(['password'=>Hash::make($request->input('password'))]);

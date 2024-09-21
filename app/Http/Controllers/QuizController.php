@@ -40,6 +40,7 @@ class QuizController extends Controller
         $orderedQuestions = $questionsFilteredByQuiz->sortBy('order');
         $question = $orderedQuestions -> first();
 
+
         $optionsFilteredByQuestion = DB::table('options')
             ->select('*')
             ->where('question_id',$question->id)
@@ -53,10 +54,12 @@ class QuizController extends Controller
 
         //Validacijos reikia
 
+
         $next = Session::get('next');
         $storedArray = Session::get('storedArray');
         $storedPoint = Session::get('storedPoint');
         $storedQuestion = Session::get('storedQuestion');
+
         $next++;
         Session::put('next',$next);
         $quiz = new Quiz();
@@ -70,6 +73,18 @@ class QuizController extends Controller
         $orderedQuestions = $questionsFilteredByQuiz->sortBy('order');
         $numberOfItems = $orderedQuestions -> count();
 
+        $correctans = Session::get('correctans');
+        $wrongans = Session::get('wrongans');
+        $total = Session::get('total');
+
+        $storedQuestion[] =$request->questionText;
+        Session::put('storedQuestion',$storedQuestion);
+        $selectedOptionId = $request->input('selectedOption');
+        $selectedOptionData = $request->input("options.$selectedOptionId");
+        $checkIf = $selectedOptionData['checkIf'];
+        $optionText = $selectedOptionData['optionText'];
+        $point = $selectedOptionData['point'];
+
         if($next < $numberOfItems)
         {
             $question = $orderedQuestions[$next];
@@ -79,17 +94,15 @@ class QuizController extends Controller
                 ->get();
             $orderedOptions = $optionsFilteredByQuestion->sortBy('order');
 
-            $correctans = Session::get('correctans');
-            $total = Session::get('total');
-            $storedQuestion[] =$request->questionText;
-            Session::put('storedQuestion',$storedQuestion);
-            if($request->checkIfCorrect == 1)
+
+
+            if($checkIf == 1)
             {
+
                 $correctans++;
-                $total = $total + ($request->point);
-                $choosed = $request->optionText;
-                $storedArray[] = $choosed;
-                $storedPoint[] =$request->point;
+                $total = $total + $point;
+                $storedArray[] = $optionText;
+                $storedPoint[] =$point;
                 Session::put('storedArray', $storedArray);
                 Session::put('storedPoint', $storedPoint);
 
@@ -97,17 +110,20 @@ class QuizController extends Controller
                 Session::put('correctans',$correctans);
             }
 
-            $wrongans = Session::get('wrongans');
-            if($request->checkIfCorrect == 0)
+
+
+            if($checkIf == 0)
             {
-                $wrongans++;
-                $choosed = $request->optionText;
-                $storedArray[] = $choosed;
-                Session::put('storedArray', $storedArray);
-                $storedPoint[] =$request->point;
-                Session::put('storedArray', $storedArray);
-                Session::put('storedPoint', $storedPoint);
-                Session::put('wrongans',$wrongans);
+
+
+                    $wrongans++;
+                    $storedArray[] = $optionText;
+                    $storedPoint[] =$point;
+                    Session::put('storedArray', $storedArray);
+                    Session::put('storedPoint', $storedPoint);
+                    Session::put('wrongans',$wrongans);
+
+
             }
 
 
@@ -117,9 +133,49 @@ class QuizController extends Controller
 
         if($next >= $numberOfItems)
         {
-            return view('pages.quizEnd');
+
+            if($checkIf == 1)
+            {
+
+                $correctans++;
+                $total = $total + $point;
+                $storedArray[] = $optionText;
+                $storedPoint[] =$point;
+                Session::put('storedArray', $storedArray);
+                Session::put('storedPoint', $storedPoint);
+
+                Session::put('total',$total);
+                Session::put('correctans',$correctans);
+            }
+
+
+
+            if($checkIf == 0)
+            {
+
+                $wrongans++;
+                $storedArray[] = $optionText;
+                $storedPoint[] =$point;
+                Session::put('storedArray', $storedArray);
+                Session::put('storedPoint', $storedPoint);
+                Session::put('wrongans',$wrongans);
+
+
+
+            }
+
+            $rightAnswers = DB::table('options')
+                ->select('*')
+                ->where('isCorrect','1')
+                ->get();
+
+            return view('pages.quizEnd', compact('rightAnswers'));
         }
 
+
+    }
+    public function filterRightAnswers()
+    {
 
     }
 

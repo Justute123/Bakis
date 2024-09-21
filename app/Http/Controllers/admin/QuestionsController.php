@@ -84,6 +84,7 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $question = Question::findOrFail($id);
         $request->validate([
                 'question_text' => 'required|string|max:255',
                 'hint' => 'required|string|max:255',
@@ -91,14 +92,6 @@ class QuestionsController extends Controller
                 'quiz_id' => 'required|not_in:0',
                 'type' => 'required',]
         );
-
-        $question= new Question();
-        $question->question_text=$request->question_text;
-        $question->hint=$request->hint;
-        $question->order=$request->order;
-        $question->quiz_id=$request->quiz_id;
-        $question->type=$request->type;
-
 
         $question->update($request->all());
         $res = $question -> save();

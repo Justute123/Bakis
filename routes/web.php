@@ -31,6 +31,7 @@ Route::post('/submitAnswer/{id}', [App\Http\Controllers\QuizController::class, '
 
 
 
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

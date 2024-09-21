@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label for="question_text">Question text: </label>
                     <input type="text" class="form-control" placeholder="Enter Question text: "
-                           name="question_text" >
+                           name="question_text" value="{{$question->question_text}}">
                     <span class="text-danger"> @error('question_text') {{$message}} @enderror</span>
                 </div>
                 <div  class="form-group">
@@ -34,13 +34,13 @@
                 <div class="form-group">
                     <label for="order">Question order: </label>
                     <input type="text" class="form-control" placeholder="Enter order: "
-                           name="order" >
+                           name="order"  value="{{$question->order}}" >
                     <span class="text-danger"> @error('order') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group">
                     <label for="hint">Question hint: </label>
                     <input type="text" class="form-control" placeholder="Enter hint: "
-                           name="hint" >
+                           name="hint" value="{{$question->hint}}">
                     <span class="text-danger"> @error('hint') {{$message}} @enderror</span>
                 </div>
                 <input type="radio" id="type_id" name="type" value="1">

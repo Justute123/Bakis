@@ -23,7 +23,7 @@ class OptionsController extends Controller
      */
     public function create()
     {
-        $questions= Question::paginate('5');
+        $questions= Question::all();
         return view('pages.dashboardOptionsForm', compact('questions'));
     }
 
@@ -84,6 +84,7 @@ class OptionsController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $option = Option::findOrFail($id);
         $request->validate([
                 'option_text' => 'required|string|max:255',
                 'point' => 'required|numeric|max:255',
@@ -91,14 +92,6 @@ class OptionsController extends Controller
                 'question_id' => 'required|not_in:0',
                 'isCorrect' => 'required',]
         );
-
-        $option= new Option();
-        $option->option_text=$request->option_text;
-        $option->point=$request->point;
-        $option->order=$request->order;
-        $option->question_id=$request->question_id;
-        $option->isCorrect=$request->isCorrect;
-
         $option->update($request->all());
         $res = $option -> save();
         if($res){

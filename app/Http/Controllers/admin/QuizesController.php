@@ -81,17 +81,12 @@ class QuizesController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $quiz = Quiz::findOrFail($id);
         $request->validate([
                 'title' => 'required|string|max:255',
                 'topic_id' => 'required|not_in:0',
                 'isActive' => 'required',]
         );
-
-        $quiz= new Quiz();
-        $quiz->title=$request->title;
-        $quiz->topic_id=$request->topic_id;
-        $quiz->isActive=$request->isActive;
-
 
         $quiz->update($request->all());
         $res = $quiz -> save();

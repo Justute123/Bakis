@@ -15,10 +15,11 @@
                             <h4> # {{Session::get("next")}}: {{$question->question_text}}</h4>
                             @foreach($orderedOptions as $option)
 
-                                <input type="radio" id="{{$option->id}}" name="optionText" value=" {{$option->option_text}}">
+                                <input type="radio" id="{{$option->id}}" name="selectedOption" value="{{ $option->id }}">
                                 <label for="optionText"> {{$option->option_text}}</label><br>
-                                <input style="visibility: hidden" value="{{$option->isCorrect}}" name="checkIfCorrect">
-                                <input style="visibility: hidden" value="{{$option->point}}" name="point">
+                                <input type="hidden" name="options[{{ $option->id }}][checkIf]" value="{{ $option->isCorrect }}">
+                                <input type="hidden" name="options[{{ $option->id }}][optionText]" value="{{ $option->option_text}}">
+                                <input type="hidden" name="options[{{ $option->id }}][point]" value="{{ $option->point}}">
                                 <input style="visibility: hidden" value="{{$option->question_id}}" name="questionId">
                                 <input style="visibility: hidden" value="{{$question->question_text}}" name="questionText">
                                 <span class="text-danger"> @error('optionText') {{$message}} @enderror</span>

@@ -28,9 +28,9 @@
                 <div  class="form-group">
                     <label for="question_id">Select question: </label>
                     <select name="question_id" id="question">
-                        <option value="">Select quiz</option>
+                        <option value="">Select question</option>
                         @foreach($questions as $question)
-                            <option value="{{$question->id}}"> {{$question->id}}</option>
+                            <option> {{$question->id}}</option>
                         @endforeach
                     </select>
                     <span class="text-danger"> @error('question_id') {{$message}} @enderror</span>
@@ -50,8 +50,8 @@
                 </div>
                 <input type="radio" id="isCorrect_id" name="isCorrect" value="1">
                 <label for="isCorrect">is correct</label><br>
-                <input type="radio" id="isCorrect_id" name="isCorrect_id" value="0">
-                <label for="isCorrect_id">is not correct</label><br>
+                <input type="radio" id="isCorrect_id" name="isCorrect" value="0">
+                <label for="isCorrect">is not correct</label><br>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

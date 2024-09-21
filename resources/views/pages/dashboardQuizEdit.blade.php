@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <label for="title">Quiz title: </label>
                     <input type="text" class="form-control" placeholder="Enter topics title: "
-                           name="title" >
+                           name="title"value="{{$quiz->title }}"  >
                     <span class="text-danger"> @error('title') {{$message}} @enderror</span>
                 </div>
                 <div  class="form-group">
@@ -30,9 +30,9 @@
                     <span class="text-danger"> @error('topic_id') {{$message}} @enderror</span>
                 </div>
 
-                <input type="radio" id="available_id" name="isActive" value="1">
+                <input type="radio" id="available_id" name="isActive" value="{{$quiz->isActive}}">
                 <label for="isActive">available</label><br>
-                <input type="radio" id="available_id" name="isActive" value="0">
+                <input type="radio" id="available_id" name="isActive" value="{{$quiz->isActive}}">
                 <label for="isActive">unavailable</label><br>
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>

@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <label for="title">Quiz title: </label>
                     <input type="text" class="form-control" placeholder="Enter topics title: "
-                           name="title" >
+                           name="title"  >
                     <span class="text-danger"> @error('title') {{$message}} @enderror</span>
                 </div>
                     <div  class="form-group">

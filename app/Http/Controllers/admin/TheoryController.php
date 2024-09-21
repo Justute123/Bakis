@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\studyProgramme;
 use Illuminate\Http\Request;
 use App\Models\Theory;
 use App\Models\Topic;
@@ -96,14 +97,11 @@ class TheoryController extends Controller
                 'image' => 'required',]
         );
 
-        $theory= new Theory();
-        $theory->title=$request->title;
-        $theory->description=$request->title;
-        $theory->topic_id=$request->topic_id;
-
+        $theory = Theory::findOrFail($id);
+        //NEATSINAUJINA FOTKEEEEEE PATAISYTI
         if($request->hasFile('image')){
 
-            $imageName = time().'.'.$request->image->extension();
+            $imageName = time().'.'.$request->image->extension();dd($imageName);
             $request->image->move(public_path('images'), $imageName);
             $theory->image = 'images/'.$imageName;
 
