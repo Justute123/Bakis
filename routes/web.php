@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return view('pages/index');
@@ -32,15 +33,9 @@ Route::post('/submitAnswer/{id}', [App\Http\Controllers\QuizController::class, '
 
 
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dash', function () {
-        return view('pages/dash');
-    })->name('dashboard');
-});
+
+
+Route::get('/home',[HomeController::class,'index']);
 
 Route::get('/admin/users', [App\Http\Controllers\admin\UsersController::class, 'index']);
 Route::get('/admin/users/create', [App\Http\Controllers\admin\UsersController::class, 'create']);

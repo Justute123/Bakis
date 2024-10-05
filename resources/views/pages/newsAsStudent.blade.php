@@ -56,7 +56,12 @@
                 <li><a href="#solved">Solved quizes history</a></li>
                 <li><a href="#tools ">Tools</a></li>
                 <li><a href="#change ">Change user details</a></li>
-                <a class="btn-getstarted" href="{{ url('/logout') }}">log out</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a class="btn-getstarted" href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </a>
+                </form>
 
 
             </ul>
@@ -85,8 +90,7 @@
 
             </div>
             <div class="col-2" id="aside">
-                <h2>Welcome, student!</h2>
-
+                <p>Welcome, student {{Auth::user()->name}}!</p>
 
 
 

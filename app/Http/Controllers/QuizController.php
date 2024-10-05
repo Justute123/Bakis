@@ -24,6 +24,9 @@ class QuizController extends Controller
 
     public function filterQuestionsByQuizId(string $id, Request $request)
     {
+
+
+
         Session::put('next','0');
         Session::put('wrongans','0');
         Session::put('correctans','0');
@@ -52,7 +55,6 @@ class QuizController extends Controller
     public function submitAnswer(Request $request)
     {
 
-        //Validacijos reikia
 
 
         $next = Session::get('next');

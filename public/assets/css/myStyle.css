@@ -4,6 +4,9 @@
 }
 #aside{
     background-color: orange;
+    width: 190px;
+    height: 1000px;
+    overflow-y: auto;
 }
 #naujas
 {
@@ -21,4 +24,16 @@
     !important
     color:black;
 }
+.modal-title-my{
+    color:black;
+
+}
+.modal-body-my{
+    color:black;
+}
+#blockModal
+{
+    background-color: red;
+}
+
 
