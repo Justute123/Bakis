@@ -9,6 +9,9 @@ use DB;
 use App\Models\Quiz;
 use App\Models\Option;
 use App\Models\Question;
+use App\Models\Result;
+use Illuminate\Support\Facades\Auth; // Correct for Auth facade
+
 
 class QuizController extends Controller
 {
@@ -170,6 +173,20 @@ class QuizController extends Controller
                 ->select('*')
                 ->where('isCorrect','1')
                 ->get();
+            $results = new Result();
+            $correctans = Session::get('correctans');
+            $wrongans = Session::get('wrongans');
+            $total2 = Session::get('total');
+            $results->quiz_id = $request->currentQuizId;
+            $results->user_id = Auth::user()->id;
+            $results->total = $total2;
+            $results->correct_answers = $correctans;
+            $results->wrong_answers = $wrongans;
+            $results->save();
+
+
+
+
 
             return view('pages.quizEnd', compact('rightAnswers'));
         }

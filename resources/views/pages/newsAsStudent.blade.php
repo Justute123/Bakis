@@ -53,7 +53,7 @@
             <ul>
                 <li><a href="{{ url('/theory') }}">Theory</a></li>
                 <li><a href="{{ url('/quiz') }}">Quizes</a></li>
-                <li><a href="#solved">Solved quizes history</a></li>
+                <li><a href="{{ url('/solved') }}">Solved quizes history</a></li>
                 <li><a href="#tools ">Tools</a></li>
                 <li><a href="#change ">Change user details</a></li>
                 <form method="POST" action="{{ route('logout') }}">

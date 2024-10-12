@@ -29,9 +29,13 @@
             </div>
             <div class="mt-4">
                 <x-label for="study_programme" value="{{ __('Study Programme(ONLY for students)') }}" />
-                <x-input id="study_programme" class="form-control form-control-lg" class="block mt-1 w-full" type="text" name="study_programme" :value="old('study_programme')" />
+                <select name="study_programme">
+                    <option value="NONE"> NONE </option>
+                    <option value="IT"> IT </option>
+                    <option value="PS"> PS </option>
+                    <option value="INFO"> INFO </option>
+                </select>
             </div>
-
             <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
                 <x-input id="password" class="form-control form-control-lg" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
