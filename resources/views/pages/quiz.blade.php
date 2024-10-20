@@ -4,8 +4,18 @@
 @section('content')
 
     @php
-        $counter = 0;
+
+           $counter = 0;
     @endphp
+    @if(Session::has('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ Session::get('error') }}
+
+            @php
+                Session::forget('error');
+            @endphp
+        </div>
+    @endif
 
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
@@ -19,19 +29,22 @@
             </thead>
             <tbody>
             @foreach($quizes as $quiz)
-
                 @php
-                    $counter++;
+                       $counter++;
                 @endphp
-
-                <td>{{ $counter }}</td>
-                <td>{{ $quiz->title }}</td>
-                <td>{{ $quiz->topic->title }}</td>
-                <td><a href="{{ url('/quiz/'.$quiz->id) }}" class="btn btn-primary stretched-link">Solve</a></td>
+                <tr>
+                    <td>{{ $counter }}</td>
+                    <td>{{ $quiz->title }}</td>
+                    <td>{{ $quiz->topic->title }}</td>
+                    <td>
+                    <a href="{{ url('quiz/'.$quiz->id) }}" class="btn btn-primary">
+                       Submit
+                    </a>
+                    </td>
+                </tr>
             @endforeach
             </tbody>
         </table>
     </div>
-
 
 @endsection

@@ -26,6 +26,7 @@ Route::get('/quiz', [App\Http\Controllers\QuizController::class, 'index']);
 Route::get('/quiz/{id}', [App\Http\Controllers\QuizController::class, 'filterQuestionsByQuizId']);
 Route::post('/submitAnswer/{id}', [App\Http\Controllers\QuizController::class, 'submitAnswer'])->name('submit');
 Route::get('/solved', [App\Http\Controllers\ResultsController::class, 'index']);
+Route::post('/sortedByTotal', [App\Http\Controllers\ResultsController::class, 'sortedByTotal'])->name('sorted');;
 
 
 

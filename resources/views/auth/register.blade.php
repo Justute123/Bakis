@@ -28,12 +28,13 @@
                 <x-input id="email" class="form-control form-control-lg" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             </div>
             <div class="mt-4">
+
                 <x-label for="study_programme" value="{{ __('Study Programme(ONLY for students)') }}" />
                 <select name="study_programme">
-                    <option value="NONE"> NONE </option>
-                    <option value="IT"> IT </option>
-                    <option value="PS"> PS </option>
-                    <option value="INFO"> INFO </option>
+                    <option value="">Select topic</option>
+                    @foreach($studyProgrammes as $studyProgramme)
+                        <option value="{{$studyProgramme->id}}"> {{$studyProgramme->title}}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="mt-4">

@@ -35,9 +35,11 @@ class QuizController extends Controller
         Session::put('correctans','0');
         Session::put('total','0');
         $storedArray = Session::put('storedArray',[]);
+        $storedCorrectAnswers = Session::put('storedCorrectAnswers',[]);
         $storedPoint = Session::put('storedPoint',[]);
         $storedQuestion = Session::put('storedQuestion',[]);
         $quiz = Quiz::findOrFail($id);
+        //dd($quiz);
 
         $questionsFilteredByQuiz = DB::table('questions')
             ->select('*')
@@ -45,6 +47,10 @@ class QuizController extends Controller
             ->get();
         $orderedQuestions = $questionsFilteredByQuiz->sortBy('order');
         $question = $orderedQuestions -> first();
+
+        if ($questionsFilteredByQuiz->isEmpty()) {
+            return redirect()->back()->with('error', 'No questions available for this quiz.');
+        }
 
 
         $optionsFilteredByQuestion = DB::table('options')
@@ -62,6 +68,7 @@ class QuizController extends Controller
 
         $next = Session::get('next');
         $storedArray = Session::get('storedArray');
+        $storedCorrectAnswers = Session::get('storedCorrectAnswers');
         $storedPoint = Session::get('storedPoint');
         $storedQuestion = Session::get('storedQuestion');
 
@@ -89,6 +96,8 @@ class QuizController extends Controller
         $checkIf = $selectedOptionData['checkIf'];
         $optionText = $selectedOptionData['optionText'];
         $point = $selectedOptionData['point'];
+        $currentQuestion = $orderedQuestions[$next - 1];
+
 
         if($next < $numberOfItems)
         {
@@ -98,6 +107,13 @@ class QuizController extends Controller
                 ->where('question_id',$question->id)
                 ->get();
             $orderedOptions = $optionsFilteredByQuestion->sortBy('order');
+
+            $storedCorrectAnswers[] = DB::table('options')
+                ->select('option_text')
+                ->where('question_id', $currentQuestion->id)
+                ->where('isCorrect','1')
+                ->get();
+            Session::put('storedCorrectAnswers', $storedCorrectAnswers);
 
 
 
@@ -138,6 +154,12 @@ class QuizController extends Controller
 
         if($next >= $numberOfItems)
         {
+            $storedCorrectAnswers[] = DB::table('options')
+                ->select('option_text')
+                ->where('question_id', $currentQuestion->id)
+                ->where('isCorrect','1')
+                ->get();
+            Session::put('storedCorrectAnswers', $storedCorrectAnswers);
 
             if($checkIf == 1)
             {
@@ -169,10 +191,7 @@ class QuizController extends Controller
 
             }
 
-            $rightAnswers = DB::table('options')
-                ->select('*')
-                ->where('isCorrect','1')
-                ->get();
+
             $results = new Result();
             $correctans = Session::get('correctans');
             $wrongans = Session::get('wrongans');
@@ -188,7 +207,7 @@ class QuizController extends Controller
 
 
 
-            return view('pages.quizEnd', compact('rightAnswers'));
+            return view('pages.quizEnd');
         }
 
 

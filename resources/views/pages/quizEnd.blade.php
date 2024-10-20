@@ -8,6 +8,10 @@
         $storedArray = Session::get('storedArray',[]);
     @endphp
     @php
+        $storedCorrectAnswers = Session::get('storedCorrectAnswers',[]);
+    @endphp
+
+    @php
         $storedPoint = Session::get('storedPoint',[]);
     @endphp
     @php
@@ -76,8 +80,15 @@
             @endforeach
         </td>
         <td>
-            @foreach($rightAnswers as $rightAnswer)
-                <p style="color:greenyellow">{{ $rightAnswer->option_text }}</p>
+            @foreach($storedCorrectAnswers as $stored)
+
+
+                @php
+
+
+                    $optionText = $stored[0]->option_text;
+                @endphp
+                <p style="color:greenyellow">{{ $optionText}}</p>
 
             @endforeach
         </td>

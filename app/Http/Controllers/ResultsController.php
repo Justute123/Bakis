@@ -14,11 +14,34 @@ class ResultsController extends Controller
      */
     public function index()
     {
-        $results = DB::table('results')
-            ->select('*')
-            ->where('user_id',Auth::user()->id)
+        // Eager load the 'user' relationship
+        $results = Result::with('user','quiz') // Load user relationship
+        ->where('user_id', Auth::user()->id)
             ->get();
+
         return view('pages.solvedQuizesHistory', compact('results'));
+    }
+    public function sortedByTotal(Request $request)
+    {
+        $sortOption = $request->input('sortOption');
+        if ($sortOption == 'total_desc') {
+            $results = Result::with('user', 'quiz') // Load user relationship
+            ->where('user_id', Auth::user()->id)
+                ->orderBy('total', 'desc')
+                ->get();
+            return view('pages.solvedQuizesHistory', compact('results'));
+        }
+        else
+        {
+            $results = Result::with('user','quiz') // Load user relationship
+            ->where('user_id', Auth::user()->id)
+                ->get();
+
+            return view('pages.solvedQuizesHistory', compact('results'));
+
+        }
+
+
     }
 
     /**
