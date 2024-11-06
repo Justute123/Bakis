@@ -52,7 +52,8 @@
         <nav id="navmenu" class="navmenu">
             <ul>
                 <li><a href="{{ url('/theory') }}">Theory</a></li>
-                <li><a href="{{ url('/quiz') }}">Quizes</a></li>
+                <li><a href="{{ url('/quiz') }}">All quizes</a></li>
+                <li><a href="{{ url('/bloom') }}">Quizes by Bloom categories</a></li>
                 <li><a href="{{ url('/solved') }}">Solved quizes history</a></li>
                 <li><a href="#tools ">Tools</a></li>
                 <li><a href="#change ">Change user details</a></li>

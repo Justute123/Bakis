@@ -37,11 +37,15 @@
                                name="email"  >
                         <span class="text-danger"> @error('email') {{$message}} @enderror</span>
                     </div>
-                    <div class="form-group">
-                        <label for="study_programme">Study programme</label>
-                        <input type="text" class="form-control" placeholder="Enter students study programme: "
-                               name="study_programme" >
-                        <span class="text-danger"> @error('study_programme') {{$message}} @enderror</span>
+                    <div  class="form-group">
+                        <label for="studyProgramme_id">Select study programme: </label>
+                        <select name="studyProgramme" id="studyProgramme_id">
+                            <option value="">Select study programme</option>
+                            @foreach($studyProgrammes as $studyProgramme)
+                                <option value="{{$studyProgramme->id}}"> {{$studyProgramme->id}}</option>
+                            @endforeach
+                        </select>
+                        <span class="text-danger"> @error('studyProgramme_id') {{$message}} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>

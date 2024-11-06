@@ -31,7 +31,7 @@ class ResultsController extends Controller
                 ->get();
             return view('pages.solvedQuizesHistory', compact('results'));
         }
-        else
+        else if($sortOption == 'selection')
         {
             $results = Result::with('user','quiz') // Load user relationship
             ->where('user_id', Auth::user()->id)

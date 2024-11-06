@@ -7,6 +7,7 @@ use App\Models\Theory;
 use Illuminate\Http\Request;
 use App\Models\Quiz;
 use App\Models\Topic;
+use App\Models\Bloom;
 
 class QuizesController extends Controller
 {
@@ -16,7 +17,8 @@ class QuizesController extends Controller
     public function index()
     {
         $quizes = Quiz::paginate('5');
-        return view('pages.dashboardQuizIndex', compact('quizes'));
+        $bloomCategories = Bloom::all();
+        return view('pages.dashboardQuizIndex', compact('bloomCategories','quizes'));
     }
 
     /**
@@ -25,7 +27,8 @@ class QuizesController extends Controller
     public function create()
     {
         $topics = Topic::paginate('5');
-        return view('pages.dashboardQuizForm', compact('topics'));
+        $bloomCategories = Bloom::all();
+        return view('pages.dashboardQuizForm', compact('topics','bloomCategories'));
     }
 
     /**
@@ -36,13 +39,15 @@ class QuizesController extends Controller
         $request->validate([
                 'title' => 'required|string|max:255',
                 'topic_id' => 'required|not_in:0',
-                'isActive' => 'required',]
+                'isActive' => 'required',
+                'bloom_id' => 'nullable|not_in:0']
         );
 
         $quiz= new Quiz();
         $quiz->title=$request->title;
         $quiz->topic_id=$request->topic_id;
         $quiz->isActive=$request->isActive;
+        $quiz->bloom_id=$request->bloom_id;
 
 
         $res = $quiz -> save();
@@ -70,10 +75,12 @@ class QuizesController extends Controller
     {
         $quiz = Quiz::findOrFail($id);
         $topics = Topic::paginate('5');
+        $bloomCategories = Bloom::all();
 
 
 
-        return view('pages.dashboardQuizEdit',compact('quiz','topics'));
+
+        return view('pages.dashboardQuizEdit',compact('quiz','topics','bloomCategories'));
     }
 
     /**
@@ -85,7 +92,8 @@ class QuizesController extends Controller
         $request->validate([
                 'title' => 'required|string|max:255',
                 'topic_id' => 'required|not_in:0',
-                'isActive' => 'required',]
+                'isActive' => 'required',
+                'bloom_id' => 'nullable']
         );
 
         $quiz->update($request->all());

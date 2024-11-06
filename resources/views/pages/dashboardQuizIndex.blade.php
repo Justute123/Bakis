@@ -54,6 +54,7 @@
                         <th>title</th>
                         <th>topic_id</th>
                         <th>is active?</th>
+                        <th>bloom categories</th>
                         <th>actions</th>
                     </tr>
                     </thead>
@@ -61,8 +62,9 @@
                     @foreach($quizes as $quiz)
                         <td>{{ $quiz->id }}</td>
                         <td>{{ $quiz->title }}</td>
-                        <td>{{ $quiz->topic_id }}</td>
+                        <td>{{ $quiz->topic->title }}</td>
                         <td>{{$quiz->isActive}}</td>
+                        <td>{{$quiz->bloom->title}}</td>
                         <td>
                             <a href="{{ url('admin/quizes/'.$quiz->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
                             <button type="button" class="btn btn-danger deleteQuizBtn"  value="{{$quiz->id}}">Delete</button>

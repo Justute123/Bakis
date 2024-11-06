@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\studyProgramme;
 
 class User extends Authenticatable
 {
@@ -31,6 +32,10 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    public function studyProgramme()
+    {
+        return $this->belongsTo(studyProgramme::class)->withDefault();
+    }
 
     /**
      * The attributes that should be hidden for serialization.

@@ -8,7 +8,7 @@
     <form  method="post" action={{ route('sorted') }} >
         @csrf
         <select name="sortOption"  class="form-select mb-4" onchange="this.form.submit()" >
-            <option  value=" ">Select</option>
+            <option  value="selection">Select</option>
             <option  value="total_desc">Sort by total descending</option>
 
         </select>

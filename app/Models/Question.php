@@ -11,4 +11,9 @@ class Question extends Model
 
     protected $table = 'questions';
     protected $fillable = ['question_text','quiz_id','type','order','hint'];
+
+    public function quiz()
+    {
+        return $this->belongsTo(Quiz::class)->withDefault();
+    }
 }

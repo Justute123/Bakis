@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\studyProgramme;
 use Hash;
 use Session;
 
@@ -16,14 +18,15 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::paginate('5');
-        $students = User::where('role_id', 1)->paginate(5);
+        $students = User::where('role_id', 1)->with('studyProgramme')->get();
         return view('pages.dashboardUsersIndex', compact('users', 'students'));
     }
 
     public function create()
     {
+        $studyProgrammes = studyProgramme::all();
 
-        return view('pages.dashboardUsersForm');
+        return view('pages.dashboardUsersForm',compact('studyProgrammes'));
     }
 
     public function store(Request $request)
@@ -34,7 +37,7 @@ class UsersController extends Controller
                 'surname' => ['required', 'alpha', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required'],
-                'study_programme' => ['nullable', 'string', 'max:255'],
+
             ]
         );
 
@@ -42,7 +45,7 @@ class UsersController extends Controller
         $user->name=$request->name;
         $user->surname=$request->surname;
         $user->email=$request->email;
-        $user->study_programme=$request->study_programme;
+        $user->study_programme=$request->input('studyProgramme');
         $user->role_id='1';
         $user->password=Hash::make($request->password);
         $res = $user -> save();
@@ -58,9 +61,10 @@ class UsersController extends Controller
     public function edit(string $id)
     {
         $student = User::findOrFail($id);
+        $studyProgrammes = studyProgramme::all();
 
 
-        return view('pages.dashboardUsersEdit',compact('student'));
+        return view('pages.dashboardUsersEdit',compact('student','studyProgrammes'));
     }
     public function update(Request $request, string $id)
     {
@@ -71,7 +75,7 @@ class UsersController extends Controller
                 'surname' => ['required', 'alpha', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$student->id],
                 'password' => ['required'],
-                'study_programme' => ['nullable', 'string', 'max:255'],
+
             ]
         );
 
@@ -79,7 +83,7 @@ class UsersController extends Controller
         $student->update(['surname'=>$request->input('surname')]);
         $student->update(['email'=>$request->input('email')]);
         $student->update(['password'=>$request->input('password')]);
-        $student->update(['study_programme'=>$request->input('study_programme')]);
+        $student->update(['study_programme'=>$request->input('studyProgramme')]);
         if(!Hash::check($request->input('password'),$student->password))
         {
             $student->update(['password'=>Hash::make($request->input('password'))]);

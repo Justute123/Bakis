@@ -63,7 +63,7 @@
                     @foreach($options as $option)
                         <td>{{ $option->id }}</td>
                         <td>{{ $option->option_text }}</td>
-                        <td>{{ $option->question_id }}</td>
+                        <td>{{ $option->question->question_text}}</td>
                         <td>{{ $option->order }}</td>
                         <td>{{ $option->isCorrect }}</td>
                         <td>{{ $option->point }}</td>

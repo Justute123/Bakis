@@ -24,10 +24,20 @@
                     <select name="topic_id" id="topic">
                         <option value="">Select topic</option>
                         @foreach($topics as $topic)
-                            <option value="{{$topic->id}}"> {{$topic->id}}</option>
+                            <option value="{{$topic->id}}"> {{$topic->title}}</option>
                         @endforeach
                     </select>
                     <span class="text-danger"> @error('topic_id') {{$message}} @enderror</span>
+                </div>
+                <div  class="form-group">
+                    <label for="bloom_id">Select bloom category: </label>
+                    <select name="bloom_id" id="bloom">
+                        <option value="">Select bloom</option>
+                        @foreach($bloomCategories  as $bloom)
+                            <option value="{{$bloom->id}}"> {{$bloom->title}}</option>
+                        @endforeach
+                    </select>
+                    <span class="text-danger"> @error('bloom_id') {{$message}} @enderror</span>
                 </div>
 
                 <input type="radio" id="available_id" name="isActive" value="{{$quiz->isActive}}">

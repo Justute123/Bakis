@@ -64,7 +64,7 @@
                     @foreach($questions as $question)
                         <td>{{ $question->id }}</td>
                         <td>{{ $question->question_text }}</td>
-                        <td>{{ $question->quiz_id }}</td>
+                        <td>{{ $question->quiz->title }}</td>
                         <td>{{ $question->order }}</td>
                         <td>{{ $question->hint }}</td>
                         <td>

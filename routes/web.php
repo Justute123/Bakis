@@ -27,6 +27,8 @@ Route::get('/quiz/{id}', [App\Http\Controllers\QuizController::class, 'filterQue
 Route::post('/submitAnswer/{id}', [App\Http\Controllers\QuizController::class, 'submitAnswer'])->name('submit');
 Route::get('/solved', [App\Http\Controllers\ResultsController::class, 'index']);
 Route::post('/sortedByTotal', [App\Http\Controllers\ResultsController::class, 'sortedByTotal'])->name('sorted');;
+Route::get('/bloom', [App\Http\Controllers\BloomController::class, 'index']);
+Route::get('/quizesFilteredByBloom/{id}', [App\Http\Controllers\BloomController::class, 'filterQuizesByBloomId']);
 
 
 
@@ -87,5 +89,8 @@ Route::post('/admin/options', [App\Http\Controllers\admin\OptionsController::cla
 Route::get('/admin/options/{id}/edit', [App\Http\Controllers\admin\OptionsController::class, 'edit']);
 Route::put('/admin/options/{id}', [App\Http\Controllers\admin\OptionsController::class, 'update'])->name('option.update');
 Route::post('admin/options/deleteOptions', [App\Http\Controllers\admin\OptionsController::class, 'destroy']);
+
+
+Route::get('/admin/solvedQuizesHistory', [App\Http\Controllers\admin\ShowResults::class, 'index']);
 
 

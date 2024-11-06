@@ -3,6 +3,7 @@
 @section('title', 'Students')
 
 @section('content')
+
         <!-- MODALINE FORMA PAKLAUSIMUI AR NORIME ISTRINTI -->
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -67,7 +68,7 @@
                                 <td>{{ $student->surname }}</td>
                                 <td>{{ $student->role_id}}</td>
                                 <td>{{ $student->email }}</td>
-                                <td>{{ $student->study_programme }}</td>
+                                <td>{{ $student->study_programme}}</td> <!-- Adjusted line -->
                                 <td>
                                     <a href="{{ url('admin/users/'.$student->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
                                     <button type="button" class="btn btn-danger deleteStudentBtn"  value="{{$student->id}}">Delete</button>
@@ -79,7 +80,7 @@
                 </div>
             </div>
         </div>
-        {{$students-> links()}}
+
 
     @endsection
 
