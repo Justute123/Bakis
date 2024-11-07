@@ -41,6 +41,8 @@ class theoryController extends Controller
     public function show(string $id)
     {
         $theory = Theory::findOrFail($id);
+        $theory->viewedTime = now();
+        $theory->save();
         return view('pages.theoryShow', compact('theory'));
     }
     public function filterTheoryById(string $id)
