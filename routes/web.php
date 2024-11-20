@@ -9,6 +9,12 @@ Route::get('/', function () {
 Route::get('/index', function () {
     return view('pages/index');
 });
+Route::get('/example', function () {
+    return view('pages/example');
+});
+Route::get('/indexOne', function () {
+    return view('pages/indexOne');
+});
 Route::get('/dashInd', function () {
     return view('pages/dashInd');
 });
@@ -17,6 +23,20 @@ Route::get('/newsAsStudent', function () {
 });
 Route::get('/quiz', function () {
     return view('pages/quiz');
+});
+Route::get('/tools', function () {
+    return view('pages/tools');
+});
+
+
+Route::get('/nonhierarchy', function () {
+    return view('pages/nonhierarchy');
+});
+Route::get('/kMeans', function () {
+    return view('pages/kMeans');
+});
+Route::get('/kMedoids', function () {
+    return view('pages/kMedoids');
 });
 
 Route::get('/theory', [App\Http\Controllers\theoryController::class, 'index']);
@@ -29,6 +49,7 @@ Route::get('/solved', [App\Http\Controllers\ResultsController::class, 'index']);
 Route::post('/sortedByTotal', [App\Http\Controllers\ResultsController::class, 'sortedByTotal'])->name('sorted');;
 Route::get('/bloom', [App\Http\Controllers\BloomController::class, 'index']);
 Route::get('/quizesFilteredByBloom/{id}', [App\Http\Controllers\BloomController::class, 'filterQuizesByBloomId']);
+Route::get('/search/{id}', [App\Http\Controllers\theoryController::class, 'search'])->name('theory.search');
 
 
 
@@ -92,5 +113,7 @@ Route::post('admin/options/deleteOptions', [App\Http\Controllers\admin\OptionsCo
 
 
 Route::get('/admin/solvedQuizesHistory', [App\Http\Controllers\admin\ShowResults::class, 'index']);
+Route::get('/hierarchy', [App\Http\Controllers\aglomerativeController::class, 'index']);
+Route::post('/hierarchy', [App\Http\Controllers\aglomerativeController::class, 'upload'])->name('upload');
 
 

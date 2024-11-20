@@ -6,17 +6,18 @@
         @php
         $counter = 0;
         @endphp
+        <form action="{{ route('theory.search', ['id' => $topic->id]) }}" method="GET">
+            <input type="text" name="search"/>
+            <button type="submit">Search</button>
+        </form>
         @foreach($theoryFilteredByTopic as $theory)
-            <div class="col-4">
+            <div class="col-4  mb-5">
 
                 @php
                 $counter++;
                 @endphp
                 <div class="card text-white bg-dark ms-10"id="suc" style="max-width: 18rem;">
                     <div class="card-header ">{{ $counter }}
-                        @if($theory->viewedTime !=null)
-                        <span class="badge bg-success ms-3">Viewed</span>
-                        @endif
                     </div>
 
                     <div class="card-body">

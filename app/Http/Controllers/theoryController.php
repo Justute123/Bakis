@@ -57,6 +57,17 @@ class theoryController extends Controller
         return view('pages.filteredByTopic', compact('topic','theoryFilteredByTopic'));
     }
 
+    public function search(Request $request, string $id)
+    {
+        $topic = Topic::findOrFail($id);
+        $search = $request->input('search');
+        $searchResults = Theory::where('topic_id',$topic->id)
+            ->where('title', 'like', "%$search%")
+            ->get();
+
+        return view('pages.searchPage', compact('searchResults'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
