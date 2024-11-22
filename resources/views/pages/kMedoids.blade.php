@@ -1,5 +1,5 @@
 @extends('pages.newsAsStudent')
-@section('title', 'K-Medoids')
+@section('title', 'k Medoids method')
 
 @section('content')
 
@@ -8,6 +8,11 @@
             @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
                 </div>
             @endif
             @if ($errors->any())
@@ -20,34 +25,40 @@
                 </div>
             @endif
 
-            <form action="{{ route('upload') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('upload3') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="file">
-                <label for="aglo_method">The agglomeration(linkage) method:</label>
-                <select name="aglo_method" id="aglo_method">
-                    <option value="">--- Choose agglomeration(linkage) method ---</option>
-                    <option value="ward.D">ward.D</option>
-                    <option value="ward.D2">ward.D2</option>
-                    <option value="single">single</option>
-                    <option value="complete">complete</option>
-                    <option value="average">average</option>
-                    <option value="median">median</option>
-                    <option value="centroid">centroid</option>
-                </select>
-                <label for="dist_method">Distance method:</label>
-                <select name="dist_method" id="dist_method">
-                    <option value="">--- Choose distance method ---</option>
+                <label for="clusters"> number of clusters: </label>
+                <input type="text" name="clusters" placeholder="Enter number of clusters: ">
+
+                <label for="metric">Pam metric: </label>
+                <select name="metric" id="metric">
+                    <option value="">--- Choose PAM metric ---</option>
                     <option value="euclidean">euclidean</option>
                     <option value="manhattan">manhattan</option>
+
+                </select>
+                <label for="method">fviz_nbclust method: </label>
+                <select name="method" id="method">
+                    <option value="">--- Choose fviz_nbclust method ---</option>
+                    <option value="wss">wss</option>
+                    <option value="silhouette">silhouette</option>
+                    <option value="gap_stat">gap_stat</option>
                 </select>
                 <button type="submit">Select</button>
             </form>
 
             @if (session('success'))
-                <img src='/assets/img/dendogram.png' width="500" height="300">
+                <img src='/assets/img/kMeansDiagram.png' width="500" height="300">
+                <img src='/assets/img/kMeansDiagramSecond.png' width="500" height="300">
+                <h1>Cluster medoids:</h1>
+                {{ $contentMedoids}}
+                <hr>
+                <h1>Clusters:</h1>
+                {{$contentClusters}}
+              
 
 
-                {{ $content }}
             @endif
         </div>
     </div>

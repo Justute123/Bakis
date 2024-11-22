@@ -14,8 +14,8 @@ class ResultsController extends Controller
      */
     public function index()
     {
-        // Eager load the 'user' relationship
-        $results = Result::with('user','quiz') // Load user relationship
+
+        $results = Result::with('user','quiz')
         ->where('user_id', Auth::user()->id)
             ->get();
 
@@ -25,7 +25,7 @@ class ResultsController extends Controller
     {
         $sortOption = $request->input('sortOption');
         if ($sortOption == 'total_desc') {
-            $results = Result::with('user', 'quiz') // Load user relationship
+            $results = Result::with('user', 'quiz')
             ->where('user_id', Auth::user()->id)
                 ->orderBy('total', 'desc')
                 ->get();
@@ -33,7 +33,7 @@ class ResultsController extends Controller
         }
         else if($sortOption == 'selection')
         {
-            $results = Result::with('user','quiz') // Load user relationship
+            $results = Result::with('user','quiz')
             ->where('user_id', Auth::user()->id)
                 ->get();
 

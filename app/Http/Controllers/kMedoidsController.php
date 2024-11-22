@@ -5,18 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class aglomerativeController extends Controller
+class kMedoidsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-
-
-        $filePath = "C://xampp//htdocs//Bakis//applicationClusterStudies//public//assets//writenData2.csv";
-        $content = file_get_contents($filePath);
-            return view('pages/hierarchy', ['content' => $content]);
+        $filePath1 = "C://xampp//htdocs//Bakis//applicationClusterStudies//public//assets//medoids.csv";
+        $contentMedoids = file_get_contents($filePath1);
+        $filePath2 = "C://xampp//htdocs//Bakis//applicationClusterStudies//public//assets//clusteringMedoid.csv";
+        $contentClusters = file_get_contents($filePath2);
+;
+        return view('pages/kMedoids', ['contentMedoids' => $contentMedoids,'contentClusters' => $contentClusters]);
     }
 
     /**
@@ -70,18 +71,24 @@ class aglomerativeController extends Controller
     {
         $request->validate([
             'file' => 'required',
-            'dist_method' => 'required',
-            'aglo_method' => 'required',
+            'clusters' => 'required|numeric',
+            'metric' => 'required',
+            'method' => 'required',
+
         ], [
             'file.required' => 'The file is required.',
-            'dist_method.required' => 'distance method is required.',
-            'aglo_method.required' => 'agglomeration method required.',
+            'clusters.required' => 'The number of clusters is required.',
+            'clusters.numeric' => 'The number of clusters should be number',
+            'metric.required' => 'The metric is required.',
+            'method.required' => 'The method is required.',
+
 
         ]);
 
         $file = $request->file('file');
-        $distMethod = $request->input('dist_method');
-        $agloMethod = $request->input('aglo_method');
+        $clusters = $request->input('clusters');
+        $metric = $request->input('metric');
+        $method= $request->input('method');
         $fileName = $file->getClientOriginalName();
         $path = $file->storeAs('storage', $fileName, 'public');
         $filePath = storage_path('app/public/storage/' . $fileName);
@@ -89,7 +96,7 @@ class aglomerativeController extends Controller
 
 
 
-    $command = 'Rscript C://xampp//htdocs//Bakis//applicationClusterStudies//resources//views//pages//sample.R ' . escapeshellarg($filePath) . ' ' . escapeshellarg($distMethod) . ' ' . escapeshellarg($agloMethod).' 2> ' . escapeshellarg($errors);
+        $command = 'Rscript C://xampp//htdocs//Bakis//applicationClusterStudies//resources//views//pages//kMedoidsCode.R ' . escapeshellarg($filePath) . ' ' . escapeshellarg($clusters) . ' ' . escapeshellarg($metric). ' ' . escapeshellarg($method). ' 2> ' . escapeshellarg($errors);;
         $output = [];
         $exitCode = 0;
         exec($command, $output, $exitCode);
@@ -102,8 +109,11 @@ class aglomerativeController extends Controller
 
 
 
-    return redirect()->back()->with('success', 'file upploaded successfully!');
+        return redirect()->back()->with('success', 'file upploaded successfully!');
 
 
     }
+
+
+
 }

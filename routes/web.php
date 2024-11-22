@@ -32,12 +32,7 @@ Route::get('/tools', function () {
 Route::get('/nonhierarchy', function () {
     return view('pages/nonhierarchy');
 });
-Route::get('/kMeans', function () {
-    return view('pages/kMeans');
-});
-Route::get('/kMedoids', function () {
-    return view('pages/kMedoids');
-});
+
 
 Route::get('/theory', [App\Http\Controllers\theoryController::class, 'index']);
 Route::get('/theory/{id}', [App\Http\Controllers\theoryController::class, 'filterTheoryById']);
@@ -115,5 +110,9 @@ Route::post('admin/options/deleteOptions', [App\Http\Controllers\admin\OptionsCo
 Route::get('/admin/solvedQuizesHistory', [App\Http\Controllers\admin\ShowResults::class, 'index']);
 Route::get('/hierarchy', [App\Http\Controllers\aglomerativeController::class, 'index']);
 Route::post('/hierarchy', [App\Http\Controllers\aglomerativeController::class, 'upload'])->name('upload');
+Route::get('/kMeans', [App\Http\Controllers\kMeansController::class, 'index']);
+Route::post('/kMeans', [App\Http\Controllers\kMeansController::class, 'upload'])->name('upload2');
+Route::get('/kMedoids', [App\Http\Controllers\kMedoidsController::class, 'index']);
+Route::post('/kMedoids', [App\Http\Controllers\kMedoidsController::class, 'upload'])->name('upload3');
 
 
