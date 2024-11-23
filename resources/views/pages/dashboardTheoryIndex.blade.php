@@ -64,7 +64,7 @@
                         <td>{{ $theory->id }}</td>
                         <td>{{ $theory->title }}</td>
                         <td><img src="{{ asset($theory->image) }}"   width='50' height='50' class="img img-responsive" alt="{{ $theory->title }}"></td>
-                        <td>{{ $theory->description}}</td>
+                        <td>{!! nl2br($theory->description) !!}</td>
                         <td>{{ $theory->topic->title }}</td>
                         <td>
                             <a href="{{ url('admin/theory/'.$theory->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>

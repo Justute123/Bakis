@@ -56,7 +56,7 @@
                 <hr>
                 <h1>Clusters:</h1>
                 {{$contentClusters}}
-              
+
 
 
             @endif

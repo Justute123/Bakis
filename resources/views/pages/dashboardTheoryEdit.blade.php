@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <label for="description">Theory description: </label>
                     <textarea type="textarea" class="form-control" placeholder="Enter theory description: "
-                              name="description" rows="50" col="15" >{{$theory->description}}</textarea>
+                              name="description"  rows="50" col="15" >{{$theory->description}}</textarea>
                     <span class="text-danger"> @error('description') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group">

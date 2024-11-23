@@ -88,7 +88,7 @@ class QuizesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $quiz = Quiz::findOrFail($id);
+
         $request->validate([
                 'title' => 'required|string|max:255',
                 'topic_id' => 'required|not_in:0',
@@ -96,8 +96,10 @@ class QuizesController extends Controller
                 'bloom_id' => 'nullable']
         );
 
-        $quiz->update($request->all());
-        $res = $quiz -> save();
+       // dd($request->input('bloom_id'));
+        $quiz = Quiz::findOrFail($id);
+        $quiz->update(['title'=>$request->input('title'),'topic_id'=>$request->input('topic_id'),'isActive'=>$request->input('isActive'),'bloom_id'=>$request->input('bloom_id')]);
+        dd($quiz->bloom_id);
         if($res){
             return redirect('admin/quizes')->with('success', 'Quiz is added succsfully');
         }

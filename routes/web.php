@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ChatGPTController;
 
 Route::get('/', function () {
     return view('pages/index');
@@ -114,5 +115,8 @@ Route::get('/kMeans', [App\Http\Controllers\kMeansController::class, 'index']);
 Route::post('/kMeans', [App\Http\Controllers\kMeansController::class, 'upload'])->name('upload2');
 Route::get('/kMedoids', [App\Http\Controllers\kMedoidsController::class, 'index']);
 Route::post('/kMedoids', [App\Http\Controllers\kMedoidsController::class, 'upload'])->name('upload3');
+Route::post('/admin/chatgpt', [ChatGPTController::class, 'index'])->name('chat-gpt.index');
+Route::get('/admin/chatgpt', [App\Http\Controllers\admin\TheoryController::class, 'create']);
+
 
 

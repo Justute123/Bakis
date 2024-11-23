@@ -10,6 +10,28 @@
             </h6>
         </div>
         <div class="card-body">
+
+            <form action="{{route('chat-gpt.index')}}" method="post" >
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @csrf
+
+            <div class="form-group">
+                <label for="chatGPT">Chat GPT prompt: </label>
+                <textarea type="textarea" class="form-control" placeholder="Enter what theory you want? "
+                          name="chatGPT" rows="5" col="15" ></textarea>
+                <button type="submit">Submit</button>
+
+            </div>
+            </form>
             <form action="{{route('theory.store')}}" method="post" enctype="multipart/form-data">
 
                 @if(Session::has('success'))
@@ -25,10 +47,11 @@
                            name="title" >
                     <span class="text-danger"> @error('title') {{$message}} @enderror</span>
                 </div>
+
                     <div class="form-group">
                         <label for="description">Theory description: </label>
                         <textarea type="textarea" class="form-control" placeholder="Enter theory description: "
-                               name="description" rows="50" col="15" ></textarea>
+                               name="description"  rows="50" col="15" >{{ $result}}</textarea>
                         <span class="text-danger"> @error('description') {{$message}} @enderror</span>
                     </div>
                     <div class="form-group">
@@ -52,4 +75,6 @@
             </form>
         </div>
     </div>
+
+
 @endsection
