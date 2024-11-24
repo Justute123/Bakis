@@ -96,24 +96,27 @@ class TheoryController extends Controller
                 'title' => 'required|string|max:255',
                 'description' => 'required',
                 'topic_id' => 'required|not_in:0',
-                'image' => 'required',]
+                'image' => 'required']
         );
+
+
 
         $theory = Theory::findOrFail($id);
 
 
-        //NEATSINAUJINA FOTKEEEEEE PATAISYTI
         if($request->hasFile('image')){
 
-            $imageName = time().'.'.$request->image->extension();
+            $file = $request->file('image');
+            $imageName = $file->getClientOriginalName();
             $request->image->move(public_path('images'), $imageName);
             $theory->image = 'images/'.$imageName;
 
-
         }
+        $theory->title = $request->title;
+        $theory->description = $request->description;
+        $theory->topic_id = $request->topic_id;
 
-        $res =$theory->update($request->all());
-
+        $res = $theory->save();
 
         if($res){
             return redirect('admin/theory')->with('success', 'Theory is updated succsfully');

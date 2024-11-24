@@ -32,5 +32,6 @@
         @endforeach
 
     </div>
+    {{$theoryFilteredByTopic -> links()}}
 
 @endsection

@@ -51,8 +51,7 @@
 
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="#hero" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="/" class="active">Home</a></li>
 
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -74,7 +73,7 @@
                     <h1>Ready to learn cluster analysis?</h1>
                     <p>We are here to help you</p>
                     <div class="d-flex">
-                        <a href="#about" class="btn-get-started">Get Started</a>
+                        <a href="/" class="btn-get-started">Get Started</a>
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">

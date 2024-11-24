@@ -34,12 +34,13 @@
     @endphp
 
 @endforeach
-<h1>Average points: {{$totalEnd/$counter}}</h1>
+<h1>Average points: {{round(($totalEnd/$counter),2)}}</h1>
 </tbody>
 </table>
 </div>
 </div>
 </div>
+
 
 
 @endsection

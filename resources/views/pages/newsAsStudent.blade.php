@@ -56,7 +56,6 @@
                 <li><a href="{{ url('/bloom') }}">Quizes by Bloom categories</a></li>
                 <li><a href="{{ url('/solved') }}">Solved quizes history</a></li>
                 <li><a href="{{ url('/tools') }}">Tools</a></li>
-                <li><a href="#change ">Change user details</a></li>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <a class="btn-getstarted" href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();">

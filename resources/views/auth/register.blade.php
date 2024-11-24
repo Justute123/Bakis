@@ -50,7 +50,6 @@
                 <x-label for="role_id" value="{{ __('Register as: ') }}" />
                 <select name="role_id">
                     <option value="1"> Student </option>
-                    <option value="2"> Teacher </option>
                 </select>
             </div>
 

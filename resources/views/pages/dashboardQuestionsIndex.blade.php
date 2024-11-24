@@ -54,7 +54,7 @@
                     <tr>
                         <th>ID</th>
                         <th>question text</th>
-                        <th>quiz_id</th>
+                        <th>quiz title</th>
                         <th>order</th>
                         <th>hint</th>
                         <th>actions</th>

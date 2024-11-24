@@ -55,7 +55,7 @@
                         <th>title</th>
                         <th>image</th>
                         <th>description</th>
-                        <th>topic_id</th>
+                        <th>topic title</th>
                         <th>actions</th>
                     </tr>
                     </thead>

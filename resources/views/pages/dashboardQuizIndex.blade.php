@@ -52,7 +52,7 @@
                     <tr>
                         <th>ID</th>
                         <th>title</th>
-                        <th>topic_id</th>
+                        <th>topic title</th>
                         <th>is active?</th>
                         <th>bloom categories</th>
                         <th>actions</th>

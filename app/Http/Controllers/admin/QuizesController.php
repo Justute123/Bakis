@@ -96,10 +96,15 @@ class QuizesController extends Controller
                 'bloom_id' => 'nullable']
         );
 
-       // dd($request->input('bloom_id'));
+
         $quiz = Quiz::findOrFail($id);
-        $quiz->update(['title'=>$request->input('title'),'topic_id'=>$request->input('topic_id'),'isActive'=>$request->input('isActive'),'bloom_id'=>$request->input('bloom_id')]);
-        dd($quiz->bloom_id);
+        $quiz->title=$request->title;
+        $quiz->topic_id=$request->topic_id;
+        $quiz->isActive=$request->isActive;
+        $quiz->bloom_id=$request->bloom_id;
+
+
+        $res = $quiz -> save();
         if($res){
             return redirect('admin/quizes')->with('success', 'Quiz is added succsfully');
         }

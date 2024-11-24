@@ -7,6 +7,7 @@ use App\Http\Controllers\ChatGPTController;
 Route::get('/', function () {
     return view('pages/index');
 });
+
 Route::get('/index', function () {
     return view('pages/index');
 });

@@ -52,7 +52,7 @@
                     <tr>
                         <th>ID</th>
                         <th>option text</th>
-                        <th>question_id</th>
+                        <th>question title</th>
                         <th>order</th>
                         <th>isCorrect</th>
                         <th>point</th>

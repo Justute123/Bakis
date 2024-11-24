@@ -51,7 +51,7 @@ class theoryController extends Controller
          $theoryFilteredByTopic = DB::table('theory')
              ->select('*')
              ->where('topic_id',$topic->id)
-             ->get();
+             ->paginate('6');
 
 
         return view('pages.filteredByTopic', compact('topic','theoryFilteredByTopic'));

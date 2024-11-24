@@ -54,9 +54,9 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Surname</th>
-                            <th>Role id</th>
+                            <th>Role </th>
                             <th>Email</th>
-                            <th>Study programme</th>
+                            <th>Study programme id</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -66,9 +66,13 @@
                                 <td>{{ $student->id }}</td>
                                 <td>{{ $student->name }}</td>
                                 <td>{{ $student->surname }}</td>
-                                <td>{{ $student->role_id}}</td>
+                                @if( $student->role_id ==  1)
+                                <td>student</td>
+                                @else
+                                    <td>teacher</td>
+                                @endif
                                 <td>{{ $student->email }}</td>
-                                <td>{{ $student->study_programme}}</td> <!-- Adjusted line -->
+                                <td>{{ $student->study_programme}}</td>
                                 <td>
                                     <a href="{{ url('admin/users/'.$student->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
                                     <button type="button" class="btn btn-danger deleteStudentBtn"  value="{{$student->id}}">Delete</button>
@@ -81,7 +85,7 @@
             </div>
         </div>
 
-
+        {{$students-> links()}}
     @endsection
 
     @section('scripts')

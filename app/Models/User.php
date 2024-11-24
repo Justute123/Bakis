@@ -32,7 +32,7 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-    public function studyProgramme()
+    public function studyprogramme()
     {
         return $this->belongsTo(studyProgramme::class)->withDefault();
     }

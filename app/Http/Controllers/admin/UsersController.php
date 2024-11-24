@@ -18,7 +18,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::paginate('5');
-        $students = User::where('role_id', 1)->with('studyProgramme')->get();
+        $students = User::with('studyprogramme')->where('role_id', 1)->paginate('5');
         return view('pages.dashboardUsersIndex', compact('users', 'students'));
     }
 
