@@ -1,12 +1,12 @@
 @extends('pages.dash')
 
-@section('title', 'Topics')
+@section('title', 'Theory')
 
 @section('content')
     <div class="card">
         <div class="card-header">
             <h6 class="m-0 font-weight-bold text-primary">
-                Edit current topic
+                Edit current theory
             </h6>
         </div>
         <div class="card-body">
@@ -35,7 +35,7 @@
                     <select name="topic_id" id="topic">
                         <option value="">Select topic</option>
                         @foreach($topics as $topic)
-                            <option value="{{$topic->id}}"> {{$topic->id}}</option>
+                            <option value="{{$topic->id}}"> {{$topic->title}}</option>
                         @endforeach
                     </select>
                     <span class="text-danger"> @error('topic_id') {{$message}} @enderror</span>

@@ -44,7 +44,7 @@
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" placeholder="Enter students password: "
-                               name="password" value="{{$student->password}}" >
+                               name="password" value="" >
                         <span class="text-danger"> @error('password') {{$message}} @enderror</span>
                     </div>
 

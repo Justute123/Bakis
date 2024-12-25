@@ -51,8 +51,6 @@
                 @if (session('success'))
             <img src='/assets/img/dendogram.png' width="500" height="300">
 
-
-                {{ $content }}
                 @endif
         </div>
     </div>

@@ -25,6 +25,7 @@
                 <th>quiz title</th>
                 <th>topic name</th>
                 <th>action</th>
+
             </tr>
             </thead>
             <tbody>
@@ -32,16 +33,18 @@
                 @php
                        $counter++;
                 @endphp
+                @if($quiz->isActive == '1')
                 <tr>
                     <td>{{ $counter }}</td>
                     <td>{{ $quiz->title }}</td>
                     <td>{{ $quiz->topic->title }}</td>
                     <td>
                     <a href="{{ url('quiz/'.$quiz->id) }}" class="btn btn-primary">
-                       Submit
+                       Solve
                     </a>
                     </td>
                 </tr>
+                @endif
             @endforeach
             </tbody>
         </table>

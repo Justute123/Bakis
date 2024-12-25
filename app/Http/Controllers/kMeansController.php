@@ -73,13 +73,14 @@ class kMeansController extends Controller
     {
 
         $request->validate([
-            'file' => 'required',
+            'file' => 'required|mimes:csv,txt',
             'centers' => 'required|numeric',
             'startNr' => 'required|numeric',
             'maxIterations' => 'required|numeric',
             'method' => 'required',
         ], [
             'file.required' => 'The file is required.',
+            'file.mimes' => 'The file should be .csv format required.',
             'centers.required' => 'The number of centers is required.',
             'startNr.required' => 'The number of startNr is required.',
             'maxIterations.required' => 'The number of max iterations is required.',

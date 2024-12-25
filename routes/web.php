@@ -29,6 +29,8 @@ Route::get('/nonhierarchy', function () {
 })->middleware('student');
 
 
+
+
 Route::get('/theory', [App\Http\Controllers\theoryController::class, 'index'])->middleware('student');
 Route::get('/theory/{id}', [App\Http\Controllers\theoryController::class, 'filterTheoryById'])->middleware('student');
 Route::get('/theory/{id}/show', [App\Http\Controllers\theoryController::class, 'show'])->middleware('student');

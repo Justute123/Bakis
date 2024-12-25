@@ -20,9 +20,7 @@
 
                 <div class="card text-white bg-dark ms-10"id="suc" style="max-width: 18rem;">
                  <div class="card-header ">{{ $counter }}
-                        @if($searchResult->viewedTime !=null)
-                            <span class="badge bg-success ms-3">Viewed</span>
-                        @endif
+
                     </div>
 
                     <div class="card-body">

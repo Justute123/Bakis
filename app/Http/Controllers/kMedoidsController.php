@@ -70,13 +70,14 @@ class kMedoidsController extends Controller
     public function upload(Request $request)
     {
         $request->validate([
-            'file' => 'required',
+            'file' => 'required|mimes:csv,txt',
             'clusters' => 'required|numeric',
             'metric' => 'required',
             'method' => 'required',
 
         ], [
             'file.required' => 'The file is required.',
+            'file.mimes' => 'The file should be .csv format required.',
             'clusters.required' => 'The number of clusters is required.',
             'clusters.numeric' => 'The number of clusters should be number',
             'metric.required' => 'The metric is required.',

@@ -69,11 +69,12 @@ class aglomerativeController extends Controller
     public function upload(Request $request)
     {
         $request->validate([
-            'file' => 'required',
+            'file' => 'required|mimes:csv,txt',
             'dist_method' => 'required',
             'aglo_method' => 'required',
         ], [
             'file.required' => 'The file is required.',
+            'file.mimes' => 'The file should be .csv format required.',
             'dist_method.required' => 'distance method is required.',
             'aglo_method.required' => 'agglomeration method required.',
 

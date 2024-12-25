@@ -91,12 +91,17 @@ class TopicsController extends Controller
     public function destroy(Request $request)
     {
         $topic = Topic::findOrFail($request->topic_delete_id);
+
+
         try {
+
+
             $topic->delete();
             return redirect('admin/topics')->with('success', 'Topic was successfully deleted');
         }
         catch (\Illuminate\Database\QueryException $exception) {
-            return back()->with('error', 'you can not delete this topic');
+
+            return back()->with('error', 'You can not delete this topic, it is used for creating quizes and theory.');
         }
     }
 }

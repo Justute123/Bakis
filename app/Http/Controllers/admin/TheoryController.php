@@ -119,10 +119,10 @@ class TheoryController extends Controller
         $res = $theory->save();
 
         if($res){
-            return redirect('admin/theory')->with('success', 'Theory is updated succsfully');
+            return redirect('admin/theory')->with('success', 'Theory is updated successfully');
         }
         else{
-            return redirect('admin/theory')->with('fail', 'Theory is not updated succsfully');
+            return redirect('admin/theory')->with('fail', 'Theory is not updated successfully');
 
         }
     }
