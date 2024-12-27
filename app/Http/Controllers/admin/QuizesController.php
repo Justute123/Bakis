@@ -125,7 +125,7 @@ class QuizesController extends Controller
             return redirect('admin/quizes')->with('success', 'Quiz was successfully deleted');
         }
         catch (\Illuminate\Database\QueryException $exception) {
-            return back()->with('error', 'you can not delete this qui');
+            return back()->with('error', 'you can not delete this quiz because it is used in options and questions');
         }
     }
 }

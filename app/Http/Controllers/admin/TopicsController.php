@@ -33,7 +33,7 @@ class TopicsController extends Controller
     {
 
         $request->validate([
-                'title' => ['required', 'alpha', 'max:255'],
+                'title' => ['required', 'string', 'max:255'],
             ]
         );
 
@@ -75,7 +75,7 @@ class TopicsController extends Controller
     {
         $topic = Topic::findOrFail($id);
         $request->validate([
-                'title' => ['required', 'alpha', 'max:255'],
+                'title' => ['required', 'string', 'max:255'],
 
             ]
         );

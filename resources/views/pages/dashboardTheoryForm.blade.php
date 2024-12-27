@@ -64,7 +64,7 @@
                         <select name="topic_id" id="topic">
                             <option value="">Select topic</option>
                             @foreach($topics as $topic)
-                                <option value="{{$topic->id}}"> {{$topic->id}}</option>
+                                <option value="{{$topic->id}}"> {{$topic->title}}</option>
                             @endforeach
                         </select>
                         <span class="text-danger"> @error('topic_id') {{$message}} @enderror</span>

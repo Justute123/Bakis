@@ -30,7 +30,7 @@
                     <select name="question_id" id="question">
                         <option value="">Select question</option>
                         @foreach($questions as $question)
-                            <option> {{$question->id}}</option>
+                            <option value="{{$question->id}}"> {{$question->question_text}}</option>
                         @endforeach
                     </select>
                     <span class="text-danger"> @error('question_id') {{$message}} @enderror</span>

@@ -10,6 +10,10 @@
             <input type="text" name="search"/>
             <button type="submit">Search</button>
         </form>
+        <div  class=" mb-5">
+
+
+        </div>
         @foreach($theoryFilteredByTopic as $theory)
             <div class="col-4  mb-5">
 

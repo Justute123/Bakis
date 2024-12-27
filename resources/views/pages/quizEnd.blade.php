@@ -7,9 +7,11 @@
     @php
         $storedArray = Session::get('storedArray',[]);
     @endphp
+
     @php
         $storedCorrectAnswers = Session::get('storedCorrectAnswers',[]);
     @endphp
+
 
     @php
         $storedPoint = Session::get('storedPoint',[]);
@@ -46,52 +48,31 @@
             <th scope="col">Choosed option</th>
             <th scope="col">Point</th>
             <th scope="col">Correct answer</th>
+
+
         </tr>
         </thead>
         <tbody>
-        <td>
 
             @php
             $i = 0;
             @endphp
                @while($i < $count)
-                @php
-                    $i++;
-                @endphp
-                   <p> {{$i}}</p>
+                   <tr>
+                       <td>{{$i}}</td>
+                       <td> {{$storedQuestion[$i]}} </td>
+                       <td> {{$storedArray[$i]}} </td>
+                       <td> {{$storedPoint[$i]}}</td>
+                       <td> <p style="color:greenyellow"> {{$storedCorrectAnswers[$i]}} </p></td>
+                        @php
+                            $i++;
+                        @endphp
+
+                   </tr>
                @endwhile
 
-        </td>
-        <td>
-            @foreach($storedQuestion as $quest)
-                <p>{{ $quest }}</p>
-            @endforeach
-
-        </td>
-        <td>
-            @foreach($storedArray as $option)
-                <p>{{ $option }}</p>
-            @endforeach
-        </td>
-        <td>
-            @foreach($storedPoint as $point)
-                <p>{{ $point }}</p>
-
-            @endforeach
-        </td>
-        <td>
-            @foreach($storedCorrectAnswers as $stored)
 
 
-                @php
-
-
-                    $optionText = $stored[0]->option_text;
-                @endphp
-                <p style="color:greenyellow">{{ $optionText}}</p>
-
-            @endforeach
-        </td>
 
         </tbody>
     </table>

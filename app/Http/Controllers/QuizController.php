@@ -58,6 +58,12 @@ class QuizController extends Controller
             ->where('question_id',$question->id)
             ->get();
         $orderedOptions = $optionsFilteredByQuestion->sortBy('order');
+        $storedCorrectAnswers[] = DB::table('options')
+            ->select('option_text')
+            ->where('question_id', $question->id)
+            ->where('isCorrect','1')
+            ->get();
+        Session::put('storedCorrectAnswers', $storedCorrectAnswers);
 
         return view('pages.questionsFilteredByQuiz', compact('orderedOptions','question','quiz','optionsFilteredByQuestion','orderedOptions'));
     }
@@ -96,7 +102,6 @@ class QuizController extends Controller
         $checkIf = $selectedOptionData['checkIf'];
         $optionText = $selectedOptionData['optionText'];
         $point = $selectedOptionData['point'];
-        $currentQuestion = $orderedQuestions[$next - 1];
 
 
         if($next < $numberOfItems)
@@ -108,12 +113,12 @@ class QuizController extends Controller
                 ->get();
             $orderedOptions = $optionsFilteredByQuestion->sortBy('order');
 
-            $storedCorrectAnswers[] = DB::table('options')
-                ->select('option_text')
-                ->where('question_id', $currentQuestion->id)
+           $storedCorrectAnswers[] = DB::table('options')
+               ->select('option_text')
+                ->where('question_id', $question->id)
                 ->where('isCorrect','1')
                 ->get();
-            Session::put('storedCorrectAnswers', $storedCorrectAnswers);
+          Session::put('storedCorrectAnswers', $storedCorrectAnswers);
 
 
 
@@ -154,12 +159,12 @@ class QuizController extends Controller
 
         if($next >= $numberOfItems)
         {
-            $storedCorrectAnswers[] = DB::table('options')
-                ->select('option_text')
-                ->where('question_id', $currentQuestion->id)
-                ->where('isCorrect','1')
-                ->get();
-            Session::put('storedCorrectAnswers', $storedCorrectAnswers);
+         //   $storedCorrectAnswers[] = DB::table('options')
+           //     ->select('option_text')
+            //    ->where('question_id', $currentQuestion->id)
+             //   ->where('isCorrect','1')
+             //   ->get();
+            //Session::put('storedCorrectAnswers', $storedCorrectAnswers);
 
             if($checkIf == 1)
             {

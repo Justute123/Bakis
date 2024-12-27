@@ -34,7 +34,9 @@
     @endphp
 
 @endforeach
-<h1>Average points: {{round(($totalEnd/$counter),2)}}</h1>
+                    @if($counter != 0)
+                        <h1>Average points: {{round(($totalEnd/$counter),2)}}</h1>
+                        @endif
 </tbody>
 </table>
 </div>

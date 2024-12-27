@@ -33,6 +33,7 @@
                 @php
                        $counter++;
                 @endphp
+
                 @if($quiz->isActive == '1')
                 <tr>
                     <td>{{ $counter }}</td>
