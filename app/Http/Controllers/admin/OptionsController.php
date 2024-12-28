@@ -72,7 +72,7 @@ class OptionsController extends Controller
     public function edit(string $id)
     {
         $option= Option::findOrFail($id);
-        $questions = Question::paginate('5');
+        $questions = Question::all();
 
 
 
